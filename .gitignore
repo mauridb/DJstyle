@@ -1,0 +1,13 @@
+# VIRTUAL ENVIRONMENT
+venv
+
+# PRODUCTION STATIC
+static_root
+
+# STUFF
+.idea
+
+# DJANGO
+*.log
+*.pyc
+db.sqlite3
