@@ -16,6 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from mapsy import views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^users/add$', views.userView, name='user-add'),
+    url(r'^nodes/add$', views.commentView, name='comment-add')
 ]

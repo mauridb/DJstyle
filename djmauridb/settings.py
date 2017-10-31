@@ -69,18 +69,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'djmauridb.wsgi.application'
+# WSGI_APPLICATION = 'djmauridb.wsgi.application' # commented for MONGO SETTINGS
 
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -134,5 +134,25 @@ REST_FRAMEWORK = {
 }
 
 
+# MONGODB SETTINGS
+# NB: when you use mongodb forget migrate and makemigrations, is useless
+#     you need only few thing todo:
+#       - import mongoengine
+#       - establish connection "connect(_MONGODB_NAME, host=_MONGODB_HOST, username=_MONGODB_USER)"
+import mongoengine
+DATABASES = {
+    'default': {
+        'ENGINE': '',
+    }
+}
 
+# SESSION_ENGINE = 'mongoengine.django.sessions' # optional
+_MONGODB_USER = 'admin'
+# _MONGODB_PASSWD = ''
+_MONGODB_HOST = '127.0.0.1'
+_MONGODB_NAME = 'djmaurimongo'
+mongoengine.connect(_MONGODB_NAME, host=_MONGODB_HOST, username=_MONGODB_USER)
 
+AUTHENTICATION_BACKENDS = (
+    'mongoengine.django.auth.MongoEngineBackend',
+)
