@@ -19,6 +19,12 @@ class Node(Document):
     name = StringField(max_length=50)
 
 
+class Point(Document):
+    lat = FloatField()
+    lng= FloatField()
+    name = StringField(max_length=50)
+
+
 class Comment(EmbeddedDocument):
     content = StringField()
     name = StringField(max_length=120)

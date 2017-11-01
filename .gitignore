@@ -4,6 +4,9 @@ venv
 # PRODUCTION STATIC
 static_root
 
+# STORED DATA
+data
+
 # STUFF
 .idea
 

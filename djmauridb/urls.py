@@ -20,6 +20,13 @@ from mapsy import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.index, name='index'),
+
+    # ROUTE: import in mongodb
+    url(r'^test/import', views.import_csv, name='import'),
+    url(r'^test/import', views.import_csv, name='import'),
+
+    # ROUTES: test insert in mongodb
     url(r'^users/add$', views.userView, name='user-add'),
     url(r'^nodes/add$', views.commentView, name='comment-add')
 ]

@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'djmauridb.wsgi.application' # commented for MONGO SETTINGS
+WSGI_APPLICATION = 'djmauridb.wsgi.application'
 
 
 # Database
