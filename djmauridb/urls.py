@@ -13,20 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 
 from mapsy import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
 
-    # ROUTE: import in mongodb
-    url(r'^test/import', views.import_csv, name='import'),
-    url(r'^test/import', views.import_csv, name='import'),
+    url(r'^$', views.welcome, name='homepage'),
 
-    # ROUTES: test insert in mongodb
-    url(r'^users/add$', views.userView, name='user-add'),
-    url(r'^nodes/add$', views.commentView, name='comment-add')
+    # ROUTE: test data with mongo
+    url(r'^data/', views.mapsy, name='data'),
+
+    # ROUTE: mapsy app
+    url(r'^mapsy/', include('mapsy.urls')),
+
+
+
+
+    # ROUTE: test insert in mongodb
+    url(r'^users/add/', views.userView, name='user-add'),
+    url(r'^nodes/add/', views.commentView, name='comment-add')
 ]

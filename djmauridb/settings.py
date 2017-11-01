@@ -156,3 +156,7 @@ mongoengine.connect(_MONGODB_NAME, host=_MONGODB_HOST, username=_MONGODB_USER)
 AUTHENTICATION_BACKENDS = (
     'mongoengine.django.auth.MongoEngineBackend',
 )
+
+
+# GOOGLE MAPS
+API_KEY = 'AIzaSyBGESazSOOjKyD34yGh8hZIILCWSkIpYsg'
