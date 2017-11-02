@@ -1,5 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+<body>
+<div style="margin-top: 50px;"></div>
+<div class="container">
+    <form action="test/import/" method="post">
+        {% csrf_token %}
+        <input class="btn btn-success" type="submit" value="Import MongoDB" disabled>
+    </form>
+
+
+
+    <h3>GOOGLE MAP</h3>
+    <div id="map"></div>
+
+    <script>
+    function initMap() {
+        var positions = [];
+        var coordinates = [];
+        {% for p in points %}
+            positions.push({'name':'{{p.name}}','lat':{{p.lat}},'lng':{{p.lng}}});
+        {% endfor %}
+
+        var pos = {lat: 45.3637, lng: 7.744};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: pos
+        });
+
+        var k;
+        for (k=0; k<positions.length; k++){
+            coordinates.push({lat:positions[k]['lat'],lng:positions[k]['lng']});
+        }
+
+        for (i=0; i<positions.length; i++){
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(positions[i]['lat'], positions[i]['lng']),
+                map: map
+            });
+        }
+
+        var flightPath = new google.maps.Polyline({
+            path: coordinates,
+            geodesic: true,
+            strokeColore: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        flightPath.setMap(map);
+
+
+    }
+
+</script>
+</div>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key={{google_key}}&callback=initMap">
+</script>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!--JQuery 3.1 -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<!--Bootstrap 3.3.7-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
@@ -15,54 +81,4 @@
        }
     </style>
 </head>
-<body>
-    <div style="margin-top: 50px;"></div>
-    <div class="container">
-        <form action="test/import/" method="post">
-            {% csrf_token %}
-            <input class="btn btn-success" type="submit" value="Import MongoDB" disabled>
-        </form>
-
-
-
-        <h3>GOOGLE MAP</h3>
-        <div id="map"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-    <script>
-      function initMap() {
-        var pos = {lat: 45.3637, lng: 7.744};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: pos
-        });
-        var marker = new google.maps.Marker({
-          position: pos,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key={{google_key}}&callback=initMap">
-    </script>
-
-    <!--------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <!--JQuery 3.1 -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <!--Bootstrap 3.3.7-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-</body>
 </html>

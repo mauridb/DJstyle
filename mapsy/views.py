@@ -19,8 +19,11 @@ def welcome(request):
 
 
 def index(request):
+    queryset = Point.objects[:30]
+    data = [{'name': elem.name, 'lat': elem.lat, 'lng': elem.lng} for elem in queryset]
     context = {
-        'google_key': API_KEY
+        'google_key': API_KEY,
+        'points': data,
     }
     return render(request, 'index.html', context)
 
