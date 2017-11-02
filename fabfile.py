@@ -25,3 +25,8 @@ def prepare_master():
     local('git merge dev')
     local('git push origin master')
     local('git checkout dev')
+
+
+# fab start_app:'APPLICATION-NAME'
+def start_app(message):
+    local('python manage.py startapp {}'.format(message))
