@@ -17,7 +17,7 @@ except Exception as e:
 	print c('KO: Insert an int value..', 'red')
 
 
-points = [ {'ID':'pnt{}'.format(index),'lat':round(random.uniform(45.0,47.0),6),'lng':round(random.uniform(6.0,7.0),6)} for index in range(0,input_times)]
+points = [ {'ID':'pnt{}'.format(index),'lat':round(random.uniform(-70.0,70.0),6),'lng':round(random.uniform(-160.0,160.0),6)} for index in range(0,input_times)]
 # print points
 
 if os.path.exists('data/')==True:

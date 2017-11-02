@@ -11,6 +11,8 @@ from mapsy.models import *
 import csv
 
 
+DEV_MANAGE_SIZE_DB_VIEW = 30
+
 def welcome(request):
     context = {
         'message': 'WELCOME'
@@ -19,7 +21,7 @@ def welcome(request):
 
 
 def index(request):
-    queryset = Point.objects[:30]
+    queryset = Point.objects[:DEV_MANAGE_SIZE_DB_VIEW]
     data = [{'name': elem.name, 'lat': elem.lat, 'lng': elem.lng} for elem in queryset]
     context = {
         'google_key': API_KEY,
@@ -47,7 +49,7 @@ def import_csv(request):
 
 
 def mapsy(request):
-    queryset = Point.objects[:10]
+    queryset = Point.objects[:DEV_MANAGE_SIZE_DB_VIEW]
     data = [{'name': elem.name, 'lat': elem.lat, 'lng': elem.lng} for elem in queryset]
     return JsonResponse(data, safe=False)
 
