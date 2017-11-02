@@ -13,11 +13,12 @@ import csv
 
 DEV_MANAGE_SIZE_DB_VIEW = 30
 
+
 def welcome(request):
     context = {
         'message': 'WELCOME'
     }
-    return HttpResponse("welcome page")
+    return render(request, 'welcome.html', context)
 
 
 def index(request):

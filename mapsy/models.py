@@ -6,26 +6,22 @@ from django.db import models
 # Create your models here.
 from mongoengine import *
 
+# TODO: create models: project, skill
 
-class User(Document):
+
+class User(Document): # TODO: mv to application authentication
     email = StringField(required=True)
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
 
 
-class Node(Document):
-    lat = FloatField()
-    lng= FloatField()
-    name = StringField(max_length=50)
-
-
 class Point(Document):
     lat = FloatField()
-    lng= FloatField()
+    lng = FloatField()
     name = StringField(max_length=50)
 
 
-class Comment(EmbeddedDocument):
+class Comment(EmbeddedDocument): # TODO: mv to application blog
     content = StringField()
     name = StringField(max_length=120)
 
@@ -40,11 +36,3 @@ class Post(Document):
 
 class TextPost(Post):
     content = StringField()
-
-
-class ImagePost(Post):
-    image_path = StringField()
-
-
-class LinkPost(Post):
-    link_url = StringField()
