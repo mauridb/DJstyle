@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>crudtest</title>
+</head>
+<body>
+
+<form action="/auth/users/add" method="post">
+    {% csrf_token %}
+    <input type="text" name="prjname" />
+    <button type="submit">test CRUD</button>
+</form>
+
+</body>
+</html>

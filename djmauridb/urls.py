@@ -28,6 +28,12 @@ urlpatterns = [
     # ROUTE: mapsy app
     url(r'^mapsy/', include('mapsy.urls')),
 
+    # ROUTE: auth app
+    url(r'^auth/', include('authC.urls')),
+
+    # ROUTE: blog app
+    # url(r'^blog/', include('blog.urls')),
+
 
 
 
