@@ -16,28 +16,26 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from mapsy import views
+from mapsy import views as mapsy_views
+from authC import views as authC_views
 
 urlpatterns = [
 
-    url(r'^$', views.welcome, name='homepage'),
+    url(r'^$', mapsy_views.welcome, name='homepage'),
 
     # ROUTE: test data with mongo
-    url(r'^data/', views.mapsy, name='data'),
+    url(r'^data/', mapsy_views.mapsy, name='data'),
 
     # ROUTE: mapsy app
     url(r'^mapsy/', include('mapsy.urls')),
 
     # ROUTE: auth app
-    url(r'^auth/', include('authC.urls')),
+    url(r'^authC/', include('authC.urls')),
 
     # ROUTE: blog app
-    # url(r'^blog/', include('blog.urls')),
+    url(r'^blog/', include('blog.urls')),
 
 
 
 
-    # ROUTE: test insert in mongodb
-    url(r'^users/add/', views.userView, name='user-add'),
-    url(r'^nodes/add/', views.commentView, name='comment-add')
 ]

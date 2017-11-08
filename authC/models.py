@@ -13,9 +13,10 @@ class Skill(Document):
 
 
 class User(Document):
-    email = StringField(required=True)
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
+    email = StringField(required=True)
+    password = StringField()
     role = StringField(max_length=50)
     projects = ListField(EmbeddedDocumentField(Project))
     meta = {'allow_inheritance': True}
