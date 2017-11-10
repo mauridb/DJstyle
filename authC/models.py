@@ -8,7 +8,7 @@ class Project(EmbeddedDocument):
     name = StringField()
 
 
-class Skill(Document):
+class Skill(EmbeddedDocument):
     name = StringField()
 
 
@@ -19,4 +19,5 @@ class User(Document):
     password = StringField()
     role = StringField(max_length=50)
     projects = ListField(EmbeddedDocumentField(Project))
+    skills = ListField(EmbeddedDocumentField(Skill))
     meta = {'allow_inheritance': True}

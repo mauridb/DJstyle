@@ -4,11 +4,18 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from authC.models import User, Project
+from authC.models import User, Project, Skill
 
 
 def test_crud(request):
     return render(request, 'testcrud.html')
+
+
+def test_skill_crud(request):
+    context = {
+        "users": User.objects.all()
+    }
+    return render(request, 'testcrudskill.html', context=context)
 
 
 def list_user(request):
@@ -16,6 +23,20 @@ def list_user(request):
         "users": User.objects.all()
     }
     return render(request, 'users/user_list.html', context=context)
+
+
+def list_skill(request):
+    result = []
+    users = User.objects.all()
+    for user in users:
+        for skill in user.skills:
+            if skill not in result:
+                result.append(skill)
+    # print skills
+    context = {
+        "skills": result
+    }
+    return render(request, 'skills/skill_list.html', context=context)
 
 
 def add_user(request):
@@ -30,7 +51,23 @@ def add_user(request):
         user.projects.append(prj1)
         user.save()
         return HttpResponse("""Well Done! Check your email to confirm..
-        <a href="/authC/test/">test again</a>
+        <a href="/blog/test/">test again</a>
         """)
     else:
         return HttpResponse("Not allowed..")
+
+
+def add_skill(request):
+    if request.method == 'POST':
+        skill = Skill(name=request.POST.get("skill", None))
+        user_id = request.POST.get("user", None)
+        user = User.objects.get(id=user_id)
+        user.update(push__skills__0=skill)
+        user.reload()
+        return HttpResponse("""Well Done! Skill was successfully updated..
+        <a href="/blog/testskill/">test again</a>
+        """)
+    else:
+        return HttpResponse("Not allowed..")
+
+
