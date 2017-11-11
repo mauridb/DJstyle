@@ -6,6 +6,8 @@ from mongoengine import *
 
 class Project(EmbeddedDocument):
     name = StringField()
+    description = StringField(max_length=300)
+    likes = IntField(max_value=999, default=0)
 
 
 class Skill(EmbeddedDocument):

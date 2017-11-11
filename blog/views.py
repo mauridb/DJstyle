@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.template import loader
 
 from authC.models import User, Project, Skill
 
@@ -34,10 +35,10 @@ def list_user(request):
 
 def list_skill(request):
     users = User.objects.all()
-    skills = set([str(skill.name) for user in users for skill in user.skills ])
+    skills = set([str(skill.name) for user in users for skill in user.skills])
     # print skills
     context = {
-        "skills":  skills
+        "skills": skills
     }
     return render(request, 'skills/skill_list.html', context=context)
 
@@ -47,7 +48,7 @@ def list_project(request):
     projects = [project for user in users for project in user.projects]
     # print skills
     context = {
-        "projects":  projects
+        "projects": projects
     }
     return render(request, 'projects/project_list.html', context=context)
 
@@ -86,7 +87,7 @@ def add_skill(request):
 
 def add_project(request):
     if request.method == 'POST':
-        project = Project(name=request.POST.get("project", None))
+        project = Project(name=request.POST.get("project", None), description=request.POST.get("description", ''))
         user_id = request.POST.get("user", None)
         user = User.objects.get(id=user_id)
         user.update(push__projects__0=project)
@@ -96,5 +97,39 @@ def add_project(request):
         """)
     else:
         return HttpResponse("Not allowed..")
+
+
+def likes_project(request, project_name):
+    if request.method == "POST":
+        if request.POST.get("plus_one", None) == 'plus':
+            print 'plus one'
+            User.objects(projects__name=project_name).update(inc__projects__S__likes=+1)
+        elif request.POST.get("minus_one", None) == 'minus':
+            print 'minus one'
+            User.objects(projects__name=project_name).update(inc__projects__S__likes=-1)
+        return redirect('/')
+    else:
+        return HttpResponse("Not allowed method..")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

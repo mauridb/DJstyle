@@ -16,10 +16,8 @@ urlpatterns = [
     url(r'^skills/$', views.list_skill, name='list-skill'),
     url(r'^skills/add/$', views.add_skill, name='add-skill'),
 
-
     # CRUD projects
     url(r'^projects/$', views.list_project, name='list-project'),
     url(r'^projects/add/$', views.add_project, name='add-project'),
-
-
+    url(r'^projects/(?P<project_name>[-\w]+)/likes', views.likes_project, name='likes-project')    # Like/Dislike
 ]
