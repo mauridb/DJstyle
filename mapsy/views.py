@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from termcolor import colored
 
+from authC.models import User
 from djmauridb.settings import API_KEY
 from mapsy.models import *
 
@@ -15,8 +16,11 @@ DEV_MANAGE_SIZE_DB_VIEW = 30
 
 
 def welcome(request):
+    users = User.objects.all()
+    projects = [prj for user in users for prj in user.projects]
     context = {
-        'message': 'WELCOME'
+        'message': 'WELCOME',
+        'projects': projects
     }
     return render(request, 'welcome.html', context)
 
@@ -53,18 +57,3 @@ def mapsy(request):
     queryset = Point.objects[:DEV_MANAGE_SIZE_DB_VIEW]
     data = [{'name': elem.name, 'lat': elem.lat, 'lng': elem.lng} for elem in queryset]
     return JsonResponse(data, safe=False)
-
-
-# Mongo test views
-def userView(request):
-    user = User(email='test@title.com', first_name='test content')
-    user.save()
-    print(user.first_name, user.email)
-    return HttpResponse("SAVED USER")
-
-
-def commentView(request):
-    node = Node(lat=9.7866, lng=45.56654, name='node1')
-    node.save()
-    print (node.lat, node.lng, node.name)
-    return HttpResponse("SAVED TextPost")
