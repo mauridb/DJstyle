@@ -18,6 +18,13 @@ def test_skill_crud(request):
     return render(request, 'testcrudskill.html', context=context)
 
 
+def test_project_crud(request):
+    context = {
+        "users": User.objects.all()
+    }
+    return render(request, 'testcrudproject.html', context=context)
+
+
 def list_user(request):
     context = {
         "users": User.objects.all()
@@ -33,6 +40,16 @@ def list_skill(request):
         "skills":  skills
     }
     return render(request, 'skills/skill_list.html', context=context)
+
+
+def list_project(request):
+    users = User.objects.all()
+    projects = [project for user in users for project in user.projects]
+    # print skills
+    context = {
+        "projects":  projects
+    }
+    return render(request, 'projects/project_list.html', context=context)
 
 
 def add_user(request):
@@ -62,6 +79,20 @@ def add_skill(request):
         user.reload()
         return HttpResponse("""Well Done! Skill was successfully updated..
         <a href="/blog/testskill/">test again</a>
+        """)
+    else:
+        return HttpResponse("Not allowed..")
+
+
+def add_project(request):
+    if request.method == 'POST':
+        project = Project(name=request.POST.get("project", None))
+        user_id = request.POST.get("user", None)
+        user = User.objects.get(id=user_id)
+        user.update(push__projects__0=project)
+        user.reload()
+        return HttpResponse("""Well Done! Project was successfully updated..
+        <a href="/blog/testproject/">test again</a>
         """)
     else:
         return HttpResponse("Not allowed..")
