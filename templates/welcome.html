@@ -191,7 +191,7 @@
                   <div class="col-md-9">
                       <h3>{{ project.name }}</h3>
                       <p>{{ project.description|truncatewords:3}}</p>
-                      <p><a href="#" class="btn btn-primary" role="button">Likes | {{project.likes}}</a> <a href="#" class="btn btn-default" role="button">Detail</a></p>
+                      <p><a href="#" class="btn btn-primary cc" role="button">Likes | {{project.likes}}</a> <a href="#" class="btn btn-default" role="button">Detail</a></p>
                   </div>
                   <div class="col-md-3">
                       <form class="pull-right" style="display:inline; margin-left:5px;" action="blog/projects/{{project.name}}/likes" method="post">{% csrf_token %}<button name="plus_one" class="btn btn-info btn-xs btn-round-resize-20" type="submit" value="plus">+</button></form>
@@ -222,4 +222,9 @@
 </nav>
 
 
+{% endblock %}
+
+
+{% block javascript %}
+<script src="{% static 'js/change-color.js' %}"></script>
 {% endblock %}
