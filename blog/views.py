@@ -26,15 +26,11 @@ def list_user(request):
 
 
 def list_skill(request):
-    result = []
     users = User.objects.all()
-    for user in users:
-        for skill in user.skills:
-            if skill not in result:
-                result.append(skill)
+    skills = set([str(skill.name) for user in users for skill in user.skills ])
     # print skills
     context = {
-        "skills": result
+        "skills":  skills
     }
     return render(request, 'skills/skill_list.html', context=context)
 
