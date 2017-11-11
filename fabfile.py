@@ -20,6 +20,10 @@ def track_dev(message):
     local('git push origin dev')
 
 
+def pull():
+    local('git pull origin master')
+
+
 def prepare_master():
     local('git checkout master')
     local('git merge dev')
