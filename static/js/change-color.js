@@ -2,18 +2,18 @@ $(document).ready(function(){
 
     console.log('jquery ready');
 
-//    var buttons = $('.btn.btn-primary.cc')
-//    for (var i=0; i < buttons; i++){
-//        var text = buttons[i].text;
-//        var btn = buttons[i];
-//        var new_text = text.split(" | ")
-//        var likes_value = parseInt(new_text[1]);
-//        if(likes_value < 0){
-//            //change btn likes to btn btn-danger
-//            btn.removeClass('btn-primary');
+//    $.getJSON( "api/v1/projects", function( data ) {
+//      var items = [];
+//      $.each( data, function( key, val ) {
+//        items.push( "<li id='" + key + "'>" + val + "</li>" );
+//      });
 //
-//        }
-//    }
+//      $( "<ul/>", {
+//        "class": "my-new-list",
+//        html: items.join( "" )
+//      }).appendTo( "body" );
+//    });
+
     function split_btns(list_buttons){
         var btns_under = []
         var btns_over = []

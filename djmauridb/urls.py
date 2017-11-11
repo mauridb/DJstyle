@@ -37,5 +37,10 @@ urlpatterns = [
 
 
 
+    # APIrest
+    url(r'^api/', include('api.urls')),
+
+
+
 
 ]
