@@ -180,10 +180,11 @@
           </div>
       </div>
   </div>
-
     </div>
+
+
     <div class="row">
-      {% for project in projects %}
+      {% for project in projects|slice:":3" %}
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <div class="caption">
