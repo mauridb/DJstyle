@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from mongoengine import DoesNotExist
 
 from authC.models import User, Project
 
@@ -25,6 +26,27 @@ def singUp(request):
                 """)
     else:
         return render(request, 'testcrud.html')
+
+
+def signIn(request):
+    if request.method == 'POST':
+        first_name = request.POST.get("first_name", None)
+        last_name = request.POST.get("last_name", None)
+        email = request.POST.get("login_email", None)
+        password = request.POST.get("password", None)
+
+
+
+        try:
+            user = User.objects.get(first_name=first_name, last_name=last_name, email=email, password=password)
+            # print user.user_id
+        except DoesNotExist:
+            return HttpResponse("""Error, user with this credentials does not exist! <b>Please try again!</b>""")
+
+        return HttpResponse("Login successfully! Welcome back, %s" % user.first_name)
+
+    else:
+        return HttpResponse(""" Not allowed!""")
 
 
 

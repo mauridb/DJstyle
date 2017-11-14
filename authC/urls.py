@@ -7,4 +7,7 @@ urlpatterns = [
     # Sign Up registration
     url(r'^signUp/$', views.singUp, name='sign-up'),
 
+    # Sign In log in the platform
+    url(r'^signIn/$', views.signIn, name='sign-in'),
+
 ]
