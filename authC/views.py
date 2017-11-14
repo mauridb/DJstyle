@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
 from mongoengine import DoesNotExist
 from termcolor import colored as c
@@ -13,7 +13,8 @@ from authC.models import User, Project
 def singUp(request):
     if request.method == 'POST':
 
-        user_id = User.objects.all().count() + 1  # TODO: better logic user.last.user_id + 1
+        user_id = list(User.objects.all())[-1].user_id + 1  # TODO: better logic user.last.user_id + 1
+        print user_id
         # prj1 = Project(name=request.POST.get("prjname", None))
         first_name = request.POST.get("first_name", None)
         last_name = request.POST.get("last_name", None)
@@ -41,7 +42,7 @@ def singUp(request):
                 <a href="/">Homepage</a>
                 """)
     else:
-        return render(request, 'testcrud.html')
+        return redirect('/')
 
 
 def signIn(request):
