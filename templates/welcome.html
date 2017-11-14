@@ -126,7 +126,10 @@
       <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 
       <!--Button trigger modal-->
-      <p><button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signIn">Sign Up</button></p>
+      <p>
+          <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signIn">Sign Up</button>
+          <button id="request_member" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#requestMember">Request Membership</button>
+      </p>
       <div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
@@ -181,6 +184,43 @@
                   </form>
 
 
+              </div>
+
+              <!-- Modal Footer -->
+              <div class="modal-footer">
+                  <small>
+                      "Enjoy, you are welcome!"
+                  </small>
+              </div>
+          </div>
+      </div>
+  </div>
+        <div class="modal fade" id="requestMember" tabindex="-1" role="dialog" aria-labelledby="reqMemb" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                  <button type="button" class="close"
+                     data-dismiss="modal">
+                         <span aria-hidden="true">&times;</span>
+                         <span class="sr-only">Close</span>
+                  </button>
+                  <h3 class="modal-title" id="reqMemb">
+                      Request Membership
+                  </h3>
+              </div>
+
+              <!-- Modal Body -->
+              <div class="modal-body">
+                  <form role="form" action="{% url 'request-membership' %}" method="post">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <label for="requestMemb">Email address</label>
+                        <input name="memb_email" type="email" class="form-control"
+                        id="requestMemb" placeholder="Type your email address" required/>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Request Membership</button>
+                  </form>
               </div>
 
               <!-- Modal Footer -->

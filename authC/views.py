@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.core.mail import EmailMessage
 from mongoengine import DoesNotExist
 from termcolor import colored as c
 
@@ -68,5 +69,20 @@ def signIn(request):
     else:
         return HttpResponse(""" Not allowed!""")
 
+
+def request_membership(request):
+    if request.method == 'POST':
+        # send email
+        email_address = request.POST.get('memb_email', None)
+        print email_address
+        mail = EmailMessage(
+            'REQUEST MEMBERSHIP',
+            'Hi, you are welcome to the dj platfrom.. Enjoy! \nby Mauridb',
+            to=[email_address]
+        )
+        mail.send()
+        return HttpResponse('Great, mail succesfully sent..')
+    else:
+        return HttpResponse("Not allowed!")
 
 
