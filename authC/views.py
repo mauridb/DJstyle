@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render
 from mongoengine import DoesNotExist
+from termcolor import colored as c
 
 from authC.models import User, Project
 
@@ -35,6 +36,12 @@ def signIn(request):
         email = request.POST.get("login_email", None)
         password = request.POST.get("password", None)
 
+        # Logs
+        print c('USER LOGGED INFO:', 'red')
+        print c('\tUSER FIRST NAME: %s' % first_name, 'yellow')
+        print c('\tUSER LAST NAME: %s' % last_name, 'yellow')
+        print c('\tUSER EMAIL: %s' % email, 'yellow')
+        print c('\tUSER PASSWORD: ******', 'yellow')
 
 
         try:
