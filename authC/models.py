@@ -15,6 +15,7 @@ class Skill(EmbeddedDocument):
 
 
 class User(Document):
+    user_id = IntField() # integer id
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
     email = StringField(required=True)

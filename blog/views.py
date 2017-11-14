@@ -55,13 +55,14 @@ def list_project(request):
 
 def add_user(request):
     if request.method == 'POST':
+        user_id = User.objects.all().count() + 1
         prj1 = Project(name=request.POST.get("prjname", None))
         first_name = request.POST.get("first_name", None)
         last_name = request.POST.get("last_name", None)
         password = request.POST.get("pwd", None)
         email = request.POST.get("email", None)
         role = request.POST.get("role", None)
-        user = User(first_name=first_name, last_name=last_name, role=role, email=email, password=password)
+        user = User(user_id=user_id, first_name=first_name, last_name=last_name, role=role, email=email, password=password)
         user.projects.append(prj1)
         user.save()
         return HttpResponse("""Well Done! Check your email to confirm..
