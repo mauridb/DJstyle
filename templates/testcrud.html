@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="{% url 'add-user' %}" method="post">
+<form action="{% url 'sign-up' %}" method="post">
     {% csrf_token %}
     <input type="text" name="first_name" placeholder="Type your first name"/><br>
     <input type="text" name="last_name" placeholder="Type your last name"/><br>
