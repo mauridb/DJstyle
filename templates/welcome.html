@@ -148,18 +148,28 @@
                   <form role="form" action="authC/signUp/" method="post">
                       {% csrf_token %}
                     <div class="form-group">
+                      <label for="Inputfirstname">First name</label>
+                        <input name="first_name" type="text" class="form-control"
+                        id="Inputfirstname" placeholder="Type your first name" required/>
+                    </div>
+                    <div class="form-group">
+                      <label for="Inputlastname">Last name</label>
+                        <input name="last_name" type="text" class="form-control"
+                        id="Inputlastname" placeholder="Type your last name" required/>
+                    </div>
+                    <div class="form-group">
                       <label for="InputEmail1">Email address</label>
-                        <input type="email" class="form-control"
+                        <input name="sign_email" type="email" class="form-control"
                         id="InputEmail1" placeholder="Type your email address" required/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                       <label for="InputPassword1">Password</label>
-                        <input type="password" class="form-control"
+                        <input name="password" type="password" class="form-control"
                             id="InputPassword1" placeholder="Type your password" required/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="InputPassword2">Confirm</label>
-                        <input type="password" class="form-control"
+                        <input name="confirm_password" type="password" class="form-control"
                             id="InputPassword2" placeholder="Confirm your password" required/>
                     </div>
                     <!--<div class="checkbox">-->
